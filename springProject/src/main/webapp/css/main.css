@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+.carousel-inner img {
+  width: 100%;
+  
+  }
+img.main-img {width:  100%;
+	 
+	}
+
+
+div.card-body {
+	width:  100%;
+	height: auto;}
+	
+a { text-decoration: none;}
+html { font-size: 1rem;}
+body { font-size: 1rem; margin:0px;font-family: 'Noto Sans KR', sans-serif;}
+
+.btnmain{  
+	  text-decoration: none;
+      font-size:1rem;
+      padding:2px 2px 2px 2px;
+      margin:5px;
+      display:inline-block;
+      border-radius: 10px;
+      background-color: white;
+ 	  color: black;
+   	  border: 2px solid #e7e7e7;
+   	 
+    }
+
+div.container1 {
+	margin: 10px 300px 0 300px"
+}
+div.sli {
+	display: none;
+}

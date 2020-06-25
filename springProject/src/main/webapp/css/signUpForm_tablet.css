@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+
+.col { flex: 0 0 50%; max-width: 50%; }

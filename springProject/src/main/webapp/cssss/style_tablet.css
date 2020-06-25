@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px;font-family: 'Noto Sans KR', sans-serif;  }
+.contain > div { width: 100%; margin: 0 auto;}

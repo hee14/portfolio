@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+label { display: inline-block; margin-bottom: .5rem; }
+input { overflow:visible; }
+.login_wrap { max-width: 504px; padding: 4.5rem 0.75rem 1.75rem 0.75rem; margin: auto; margin-bottom: 5rem!important;}
+.login_wrap > form > h2 { text-align: center; font-weight: 400; font-size: 1.65rem; margin-block-start: 0px; color:#363a3c!important;}
+.login_wrap .input-info .info-group { margin-top: 1.5rem; margin-bottom: 1.75rem; }
+.input-info .info-group label { font-size: 16px; text-align: left; color: #878d91; font-weight:300; }
+.input-info .info-group .inputlogin { display: block; width: 100%; font-weight: 400; font-size: 16px; line-height: 1.5; color: #363a3c; border-radius: 3px; background-color: #fff; padding: 14px; height: unset; background-clip:padding-box; border:1px solid #ced3d6; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
+.input-info .info-group .inputlogin:focus {outline:1px solid black; }
+.input-info .info-group .feedback { margin-top: 0.75rem; }
+.input-info .info-group .feedback .is-danger { color: #ff7060; margin-top:.5rem!important; }
+
+.login_wrap .loginConnec { max-width: 600px; padding: 0rem 0.75rem 0rem 0.75rem; margin: auto; margin-bottom: 1.71rem!important; }
+.login_wrap .loginConnec .loginConnec_info { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; }
+.login_wrap .loginConnec .loginConnec_info .autologin { padding: 0!important; width: auto; position: relative;}
+.loginConnec .loginConnec_info .autologin .auto-check {/*  display:none; */ }
+.auto-check-label { font-size: 0.8rem!important; color: #878d91;}
+.loginConnec .loginConnec_info .findinfo {font-size:0.8rem!important; top: 3px; padding: 0!important; width: 100%; position: relative;  flex: 0 0 80%; max-width:76%;}
+.loginConnec .loginConnec_info .findinfo .findinfo-list { justify-content: flex-end!important; display: flex!important; }
+.loginConnec_info .findinfo .findinfo-list  .findinfo-list-li { cursor: pointer; color: #fd8533!important; }
+.btn { text-align: center; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.5rem 2.75rem; font-size: 1rem; line-height: 1.5; border-radius: 3px;}
+.btn-login { width: 100%; margin-bottom: 40px;  color: #fff; background-color: #767b7e; border-color:#363a3c; opacity: .55; font-weight:400; display: block;}
+.singuplink { font-size:0.8rem!important; text-align:center!important; }

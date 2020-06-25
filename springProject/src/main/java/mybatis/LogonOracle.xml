@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Logon">
+	<cache />
+	
+	<select id = "confirmName" parameterType = "string" resultType = "String">
+		select name from member where name = #{name}
+	</select>
+	
+	<select id = "confirmEmail" parameterType = "string" resultType = "String">
+		select email from member where email = #{email}
+	</select>
+
+	<insert id="insertMember" parameterType="Logon">
+		insert into member values(member_seq.nextval, #{email}, #{gender}, #{profileImg}, #{name}, #{password}, #{phone}, #{birthday}, #{address},sysdate)
+	</insert>
+	
+	<select id="getPasswd"    parameterType="string"  resultType="string">
+		select password from member where email = #{email}
+	</select>
+
+	<select id="findName"    parameterType="string"  resultType="string">
+		select name from member where email = #{email}
+	</select>
+	
+	<select id="getUser"  parameterType="string"  resultType="Logon">
+		select * from member where email = #{email}
+	</select>
+
+</mapper>

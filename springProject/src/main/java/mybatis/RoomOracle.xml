@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Room">
+
+	<select id="getArticleNum" resultType="int">
+		select nvl(max(num)+1,1)
+		from hobbyclass
+	</select>
+
+	<insert id="insert_max" parameterType="Room">
+		insert into hobbyclass
+		values(#{num},#{like_ca},#{like_sub},#{meet_title},#{photo},#{content},#{host},#{membercnt},#{location},sysdate)
+	</insert>
+
+	<select id="getNum" parameterType="string" resultType="int">
+		select num
+		from hobbyclass where (host, reg_date) in (select host, max(reg_date)
+		from hobbyclass where host = #{host} group by host) order by reg_date
+		desc
+	</select>
+
+	<select id="getArticleList" resultType="Room">
+		select * from hobbyclass
+	</select>
+
+	<select id="getArticle" parameterType="int" resultType="Room">
+		select *
+		from hobbyclass where num=#{num}
+	</select>
+
+	<select id="getRoomCateImg" parameterType="int" resultType="string">
+		select inter.interestpng as interestPng from hobbyclass hc, interest
+		inter where hc.like_ca = inter.interestnum and num=#{num}
+	</select>
+
+
+	<select id="check" parameterType="hashmap" resultType="int">
+		select
+		count(*) from classjoin where email=#{email} and classnum=#{num}
+	</select>
+
+	<select id="joincheckcnt" parameterType="hashmap" resultType="int">
+		select count(*) from classjoin where email=#{email} and
+		classnum=#{num}
+	</select>
+
+	<select id="joincheck" parameterType="hashmap" resultType="int">
+		select status from classjoin where email=#{email} and classnum=#{num}
+	</select>
+
+	<delete id="roomOut" parameterType="hashmap">
+		delete classjoin where
+		email=#{email} and classnum=#{num}
+	</delete>
+
+	<select id="getMember" parameterType="string" resultType="Logon">
+		select
+		* from member where email=#{email}
+	</select>
+
+	<insert id="roomJoin" parameterType="Mypage">
+		insert into classjoin
+		values(#{like_ca},#{meet_title},#{email},#{gender},#{name},#{birthday},#{classnum},#{membercnt},#{status},sysdate)
+	</insert>
+
+	<insert id="roomBook" parameterType="RoomBook">
+		insert into classbook
+		values(book_seq.nextval,#{num},#{meet_subtitle},#{meet_date_start},#{meet_date_end},#{meet_time_start},#{meet_time_end},#{membercnt},#{meet_location},#{fee},sysdate)
+	</insert>
+
+	<select id="getBookList" parameterType="int" resultType="RoomBook">
+		select *
+		from classbook where num=#{num}
+	</select>
+
+	<!-- <select id="getMemberList" parameterType="int" resultType="Mypage"> -->
+	<!-- select cj.*, m.profileimg as profileImg from classjoin cj, member m -->
+	<!-- where cj.name = m.name and cj.classnum=#{num} -->
+	<!-- </select> -->
+
+	<select id="getMemberList" parameterType="int" resultType="Mypage">
+		select m.memid as memid, cj.*, m.profileimg as profileImg from
+		classjoin cj, member m where cj.name = m.name and cj.classnum=#{num}
+	</select>
+
+	<select id="jangCheck" parameterType="hashMap" resultType="int">
+		select count(*) from classjoin where classnum =#{num} and status = 1
+		and name =#{name}
+	</select>
+
+	<select id="bookCheck" parameterType="int" resultType="int">
+		select
+		count(*) from classbook where num =#{num}
+	</select>
+
+	<select id="getMemberListCnt" parameterType="int" resultType="int">
+		select count(*) from classjoin where classnum=#{num}
+	</select>
+
+	<select id="getmynum" parameterType="string" resultType="Mypage">
+		select *
+		from classjoin where email = #{email}
+	</select>
+
+	<select id="getArticleCount" parameterType="int" resultType="int">
+		select nvl(count(*), 0) from hobbyclass
+	</select>
+
+	<select id="getArticles" parameterType="hashmap" resultType="Room">
+		select * from ( select rownum rnum, a.* from (
+		select * from hobbyclass
+		order by num desc) a )
+		where rnum between #{startRow} and #{endRow}
+	</select>
+
+	<select id="checkcnt" parameterType="int" resultType="int">
+		select
+		count(*) from classjoin where classnum=#{num}
+	</select>
+
+	<select id="checkmemcnt" parameterType="int" resultType="int">
+		select
+		membercnt from hobbyclass where num=#{num}
+	</select>
+
+	<select id="getCateArticles" parameterType="hashmap" resultType="Room">
+		select * from ( select rownum rnum, a.* from (
+		select * from hobbyclass
+		where like_ca=#{like_ca}
+		order by num) a )
+		where rnum between
+		#{startRow} and #{endRow}
+	</select>
+
+	<select id="getCateArticleOne" resultType="Room">
+		select * from ( select
+		ROW_NUMBER() over (partition by like_ca order by num) rnum, a.* from (
+		select * from hobbyclass ) a )
+		where rnum=1
+	</select>
+
+	<insert id="bookmemberJoin" parameterType="Bookmem">
+		insert into bookmember
+		values(#{class_id},#{book_id},#{name})
+	</insert>
+
+	<select id="bookmembercnt" parameterType="Bookmem" resultType="int">
+		select membercnt from classbook where num=#{class_id} and
+		book_id=#{book_id}
+	</select>
+
+	<select id="checkbookcnt" parameterType="Bookmem" resultType="int">
+		select count(*) from bookmember where class_id=#{class_id} and
+		book_id=#{book_id}
+	</select>
+
+	<select id="bookmemcheck" parameterType="Bookmem" resultType="int">
+		select count(*) from bookmember where class_id=#{class_id} and
+		book_id=#{book_id} and name=#{name}
+	</select>
+
+	<select id="getnoticeli" resultType="Notice">
+		select * from notice
+	</select>
+
+	<update id="readcntup" parameterType="int">
+		update notice set readcount
+		= readcount+1 where notice_id=#{notice_id}
+	</update>
+
+	<select id="getnotice" parameterType="int" resultType="Notice">
+		select *
+		from notice where notice_id=#{notice_id}
+	</select>
+
+
+	<delete id="deletebookmem" parameterType="Bookmem">
+		delete bookmember where
+		class_id=#{class_id} and
+		book_id=#{book_id} and name=#{name}
+	</delete>
+
+	<delete id="memberkick" parameterType="hashmap">
+		delete classjoin where
+		classnum=#{classnum} and
+		name=#{name}
+	</delete>
+
+	<select id="memcheckmem" parameterType="hashmap" resultType="int">
+		select count(*) from bookmember where class_id=#{class_id} and
+		name=#{name}
+
+	</select>
+
+	<delete id="bookmemberout" parameterType="hashmap">
+		delete bookmember where
+		class_id=#{class_id} and
+		name=#{name}
+	</delete>
+
+
+	<update id="memberstat" parameterType="hashmap">
+		update classjoin set
+		status=#{status} where classnum=#{classnum} and
+		name=#{name}
+	</update>
+
+	<select id="getCateArticleCount" parameterType="int" resultType="int">
+		select nvl(count(*), 0) from hobbyclass where like_ca=#{like_ca}
+	</select>
+
+	<select id="getSearchList" parameterType="hashmap" resultType="Room">
+		select * from (
+		select distinct rownum as rnum, aa.*
+		from (select
+		distinct hc.NUM, inter.INTERESTNAME as internames,
+		inter_sub.INTERSUBNAME as intersubnames,
+		hc.MEET_TITLE, hc.PHOTO,
+		hc.content, hc.host,
+		hc.membercnt, hc.LOCATION, hc.reg_date from
+		HOBBYCLASS hc,interest inter,
+		INTEREST_SUB inter_sub
+		where hc.LIKE_CA(+)
+		= inter.INTERESTNUM and inter.INTERESTNUM =
+		inter_sub.INTERNUM and
+		hc.LIKE_SUB = inter_sub.INTERSUBNUM) aa
+		where aa.internames like
+		'%'||#{keyword2}||'%'
+		or aa.intersubnames like '%'||#{keyword2}||'%'
+		or
+		aa.MEET_TITLE like '%'||#{keyword2}||'%'
+		or aa.content like
+		'%'||#{keyword2}||'%' ) where rnum between #{startRow} and #{endRow}
+		order by rnum
+	</select>
+
+	<select id="getSearchListCheck" parameterType="string"
+		resultType="int">
+		select distinct count(*)
+		from (select distinct hc.NUM,
+		inter.INTERESTNAME as internames, inter_sub.INTERSUBNAME as
+		intersubnames, hc.MEET_TITLE, hc.PHOTO, hc.content, hc.host,
+		hc.membercnt, hc.LOCATION, hc.reg_date from HOBBYCLASS hc, interest
+		inter, INTEREST_SUB inter_sub where hc.LIKE_CA(+) = inter.INTERESTNUM
+		and inter.INTERESTNUM = inter_sub.INTERNUM and hc.LIKE_SUB =
+		inter_sub.INTERSUBNUM) aa
+		where aa.internames LIKE
+		'%'||#{keyword2}||'%'
+		or aa.intersubnames LIKE '%'||#{keyword2}||'%'
+		or
+		aa.MEET_TITLE LIKE '%'||#{keyword2}||'%'
+		or aa.content LIKE
+		'%'||#{keyword2}||'%'
+	</select>
+
+	<select id="getbookmembers" resultType="Bookmem">
+		select * from bookmember
+	</select>
+
+	<delete id="classdelete" parameterType="int">
+		delete hobbyclass where
+		num = #{num}
+	</delete>
+
+</mapper>

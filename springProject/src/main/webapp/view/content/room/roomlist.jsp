@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style>
+img {
+	width: 100px;
+	height: auto;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<c:forEach var="li" items="${li }">
+		<a href="<%=request.getContextPath()%>/room/roomcontent?num=${li.num}">
+			<img src="<%= request.getContextPath()%>/uploadFile/${li.photo}">
+			<h3>${li.meet_title }</h3>
+			<p>${li.location }</p>
+			<p>${li.host }</p>
+		</a>
+	</c:forEach>
+	
+</body>
+</html>

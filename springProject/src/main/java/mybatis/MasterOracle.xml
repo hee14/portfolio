@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.master">
+
+	<select id="classbook" resultType="RoomBook">
+		select * from classbook
+	</select>
+
+	<select id="classjoin" resultType="Mypage">
+		select * from classjoin
+	</select>
+
+	<select id="hobbyclass" resultType="Room">
+		select * from hobbyclass
+	</select>
+
+	<select id="member" resultType="Logon">
+		select * from member
+	</select>
+	<select id="getNotice" resultType="Notice">
+		select * from notice
+	</select>
+
+	<select id="getBanner" resultType="Banners">
+		select * from banners
+	</select>
+
+	<select id="usercounting" resultType="Count">
+		select (select count(*)
+		from member) as counting, '전체 회원 수' as name from
+		dual
+	</select>
+	<select id="mancounting" resultType="Count">
+		select (select count(*)
+		from
+		member where gender='남') as counting, '남성 회원 수'
+		as name from dual
+	</select>
+	<select id="girlcounting" resultType="Count">
+		select (select count(*)
+		from member where gender='여') as counting, '여성 회원 수'
+		as name from dual
+	</select>
+	<select id="classcounting" resultType="Count">
+		select (select count(*)
+		from hobbyclass) as counting, '전체 모임 수' as name from
+		dual
+	</select>
+
+	<insert id="insertBanner" parameterType="Banners">
+		insert into banners
+		values(banners_seq.nextval,#{bannerImg},#{bannerStatus},sysdate)
+	</insert>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice
+		values(notice_seq.nextval,#{title},#{content},sysdate,#{readcount})
+	</insert>
+
+
+	<delete id="memberdelete" parameterType="int">
+		delete member where
+		memid = #{memno}
+	</delete>
+	
+	<delete id="noticedelete" parameterType="int">
+		delete notice where
+		notice_id = #{notice_id}
+	</delete>
+
+	<delete id="classdelete" parameterType="int">
+		delete hobbyclass where
+		num = #{num}
+	</delete>
+
+	<delete id="classjoindelete" parameterType="int">
+		delete classjoin
+		where classnum = #{num}
+	</delete>
+
+	<delete id="classbookdelet" parameterType="int">
+		delete classbook where
+		num = #{num}
+	</delete>
+
+	<delete id="bookmemberdelete" parameterType="int">
+		delete bookmember
+		where class_id = #{class_id}
+	</delete>
+
+	<delete id="boarddelete" parameterType="int">
+		delete board where num =
+		#{num}
+	</delete>
+
+	<delete id="bannerdelete" parameterType="int">
+		delete banners where
+		bannerid = #{bannerid}
+	</delete>
+
+	<select id="agetotal" resultType="ageCount">
+		select aggee*10 as name,count(*) as cnt from ( select
+		substr(age,1,1) as aggee from (select
+		substr(TO_CHAR(sysdate,'yyyyMMdd'),1,4) - substr(birthday,1,4) as
+		"AGE" from member)) group by aggee order by name
+
+	</select>
+
+
+</mapper>
+
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Mypage">
+	<cache />
+
+	<select id="getMyRoomList" parameterType="string" resultType="Mypage">
+		select cj.*, inter.interestpng from classJoin cj, interest inter where
+		cj.like_ca = inter.interestnum and email = #{email}
+	</select>
+
+	<select id="getHobbyclassNum" parameterType="int" resultType="Room">
+		select * from hobbyclass where num = #{classnum}
+	</select>
+
+	<select id="getClassBook" parameterType="int" resultType="RoomBook">
+		select
+		* from classBook where num = #{num}
+	</select>
+
+	<select id="getMemLike" parameterType="string" resultType="Interest">
+		select DISTINCT m.meminternum as interNum, i.interestname as
+		interestName, i.interestpng as interestPng from memberLike m, interest
+		i where m.meminternum = i.interestnum and m.membername = #{name}
+	</select>
+
+	<select id="getMemberLikeCheck" parameterType="string"
+		resultType="int">
+		select count(*) from memberLike where memberName = #{name}
+	</select>
+
+	<delete id="deleteMemberLike" parameterType="string">
+		delete from
+		MEMBERLIKE where memberName = #{name}
+	</delete>
+
+
+	<select id="getMemberInfo" parameterType="int" resultType="Logon">
+		select memid, profileImg, name, birthday, address from member where
+		memid=#{memid}
+	</select>
+
+	<select id="getmemberJoinClass" parameterType="int" resultType="Mypage">
+		select inter.interestpng, cj.meet_title, cj.classnum as classnum from
+		classjoin cj, member mem, interest inter where cj.email = mem.email
+		and cj.like_ca = inter.interestnum and mem.memid = #{memid}
+	</select>
+
+	<select id="getmemberJoinClassCnt" parameterType="int"
+		resultType="int">
+		select count(*) from classjoin cj, member mem, interest inter where cj.email
+		= mem.email and cj.like_ca = inter.interestnum and mem.memid =
+		#{memid}
+	</select>
+
+	<select id="getBoardList" parameterType="int" resultType="Board">
+		select board.* from board, member where board.name = member.name and
+		board.re_step =0 and member.memid=#{memid}
+	</select>
+
+	<select id="getBoardListCnt" parameterType="int" resultType="int">
+		select count(*) from board, member where board.name = member.name and
+		board.re_step =0 and member.memid=#{memid}
+	</select>
+
+	<select id="getMemberComment" parameterType="int" resultType="Board">
+		select board.* from board, member where board.name = member.name and
+		board.re_step > 0 and member.memid=#{memid}
+	</select>
+
+	<select id="getMemberCommentCnt" parameterType="int" resultType="int">
+		select count(*) from board, member where board.name = member.name and
+		board.re_step > 0 and member.memid=#{memid}
+	</select>
+	
+	<select id="getbookmem" parameterType="string" resultType="Bookmem">
+		select * from bookmember where name=#{name}
+	</select>
+</mapper>

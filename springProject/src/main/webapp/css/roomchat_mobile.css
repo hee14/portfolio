@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+html { font-size: 16px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+.col-12 row justify-content-center align-items-center my-4{ max-width:85%;  max-height: 70%;}
+.col-11{ height: 400px; }
+.col-12-1 {width: 85%;  max-height: 70%; }
+div .row { display:inline-flex!important; }
+.infoinfos {  padding-left:7%!important; }
+.roomcon { padding-right:5%!important; padding-left:5%!important; } 
+.rororo { margin-left: 7px!important; padding:0px 0px 0px 5px} 
+.mobilelink{
+	float: left;
+	
+}
+.mobilea{
+	padding: 8px 20px!important;
+	
+}
+.roomchat_wrap { padding:1rem 0rem 1rem 0rem!important; }
+.chatTitle { margin-top:0.5rem!important; margin-bottom:1rem!important;}
+.chatTitlename { flex: 0 0 88.666667%; max-width:88.666667%; }
+
+/* 채팅내용 */
+.chatchat{
+	padding-right:0px; padding-left:0px;	
+}
+.chatchatA {
+	padding-right:0px; padding-left:0px;
+}
+
+.chatinput { padding:0px; } 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Chat">
+
+
+<select id ="isRoom" resultType = "Message">
+
+select * from Message WHERE class_id = #{class_id} order by message_sendTime
+
+</select>
+
+<insert id = "insertMessage" parameterType="Message">
+insert into Message (message_sender, message_content, message_sendTime, message_profileImg, class_id)
+values (#{message_sender}, #{message_content}, #{message_sendTime}, #{message_profileImg}, #{class_id})
+</insert>
+
+
+</mapper>

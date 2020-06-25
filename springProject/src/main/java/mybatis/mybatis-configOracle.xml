@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="model.InterestDataBean" alias="Interest" />
+		<typeAlias type="model.LogonDataBean" alias="Logon" />
+		<typeAlias type="model.MyPageDataBean" alias="Mypage" />
+		<typeAlias type="model.RoomDataBean" alias="Room" />
+		<typeAlias type="model.RoomBookDataBean" alias="RoomBook" />
+		<typeAlias type="model.BoardDataBean" alias="Board" />
+		<typeAlias type="model.MessageDataBean" alias="Message" />
+		<typeAlias type="model.CountDataBean" alias="Count" />
+		<typeAlias type="model.LikeDataBean" alias="Like" />
+		<typeAlias type="model.BookmemberDataBean" alias="Bookmem" />
+		<typeAlias type="model.BannerDataBean" alias="Banners" />
+		<typeAlias type="model.Agetotalcount" alias="ageCount" />
+		<typeAlias type="model.PhotoDataBean" alias="Photo" />
+		<typeAlias type="model.PhotoLikeDataBean" alias="PhotoLike" />
+		<typeAlias type="model.NoticeDataBean" alias="Notice" />
+		<typeAlias type="model.NoteDataBean" alias="Note" />
+		<typeAlias type="model.MapDataBean" alias="Smap" />
+	</typeAliases>
+	<typeHandlers>
+        <typeHandler handler="handler.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="users" />
+				<property name="password" value="1111" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mybatis/RoomOracle.xml" />
+		<mapper resource="mybatis/InterestOracle.xml" />
+		<mapper resource="mybatis/LogonOracle.xml" />
+		<mapper resource="mybatis/MypageOracle.xml" />
+		<mapper resource="mybatis/MasterOracle.xml" />
+		<mapper resource="mybatis/BoardOracle.xml" />
+		<mapper resource="mybatis/ChatOracle.xml" />
+		<mapper resource="mybatis/PhotoOracle.xml" />
+		<mapper resource="mybatis/NoteOracle.xml" />
+		<mapper resource="mybatis/MapOracle.xml" />
+	</mappers>
+	
+</configuration>

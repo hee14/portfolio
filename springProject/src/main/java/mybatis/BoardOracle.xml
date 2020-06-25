@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Board">
+	<cache />
+
+	<select resultType="int" parameterType="int" id="getArticleCount">select
+		nvl(count(*), 0) from board where num = #{num}
+	</select>
+
+	<!-- <select resultType="Board" parameterType="hashmap" id="getArticles">select 
+		* -->
+	<!-- from ( select rownum rnum, a.* from (select * from board where num 
+		= -->
+	<!-- #{num} order by ref desc, re_step) a )where rnum between #{startRow} -->
+	<!-- and #{endRow} -->
+	<!-- </select> -->
+	<select id="getArticles" parameterType="hashmap" resultType="Board">
+	select
+		* from (select rownum rnum, a.* from (select board.*,member.profileimg
+		from board, member where board.name = member.name and num =#{num} and
+		articlenum = ref order by ref desc, re_step) a) where rnum between
+		#{startRow} and #{endRow}
+	</select>
+
+	<select resultType="int" id="insert_max">
+	select board_seq.nextval from dual
+	</select>
+
+	<select id="getCommentCount" parameterType="int" resultType="int">select
+		count(*)-1 from board where ref = #{articlenum} </select>
+
+	<!-- 댓글 리스트 -->
+
+
+	<select id="getBoardComments" parameterType="int" resultType="Board">select
+		* from Board where ref = #{articlenum} and articlenum!=ref order by
+		articlenum  </select>
+
+	<update parameterType="hashmap" id="insert_update">
+
+		<!-- 새글이 아닐 경우(답글일 경우) -->
+
+		update BOARD set re_step = re_step+1where ref=#{ref} and re_step >
+		#{re_step}
+	</update>
+
+	<insert parameterType="Board" id="insert">insert into board
+		values(#{articlenum}, #{num}, #{boardid}, #{name}, #{email},
+		#{subject},#{passwd}, sysdate, 0, #{ref}, #{re_step}, #{re_level},
+		#{content},#{ip}, #{filename}, #{filesize}, 0)
+	</insert>
+
+	<update parameterType="int" id="content_update">update board set
+		readcount=readcount + 1 where articlenum = #{articlenum}
+	</update>
+
+	<select resultType="Board" parameterType="int" id="getArticle">select * from
+		board where articlenum =#{articlenum}
+	</select>
+
+	<select resultType="string" parameterType="int" id="getPasswd">select passwd
+		from board where articlenum = #{articlenum}
+	</select>
+
+	<update parameterType="Board" id="update">update board set name=#{name},
+		email=#{email},subject=#{subject}, passwd=#{passwd},
+		content=#{content} where articlenum=#{articlenum}
+	</update>
+
+	<delete parameterType="int" id="delete">delete from board where
+		articlenum = #{articlenum}
+	</delete>
+
+	<update parameterType="int" id="like_update">update board set like1 = like1 +
+		1 where articlenum = #{articlenum}
+	</update>
+
+	<!-- like -->
+
+
+	<select resultType="Like" parameterType="hashmap" id="getLike">select *
+		from likey where articlenum = #{articlenum} and email=#{email}
+	</select>
+
+	<select resultType="int" parameterType="hashmap" id="getLikeCheck">select
+		likecheck from likey where articlenum = #{articlenum} and
+		email=#{email}
+	</select>
+
+	<!-- 해당하는 행이 있는지 카운트 -->
+
+
+	<select resultType="int" parameterType="HashMap" id="countbyLike">SELECT
+		COUNT(likenum) FROM likey WHERE articlenum=#{articlenum} AND
+		email=#{email}
+	</select>
+
+	<!-- 처음 좋아요를 누르는 경우 insert -->
+
+
+	<insert parameterType="HashMap" id="create">INSERT INTO likey (likenum,
+		articlenum, email, likecheck)VALUES ( (SELECT NVL(MAX(likenum), 0) + 1
+		FROM likey), #{articlenum}, #{email}, 1)
+	</insert>
+
+	<!-- 하트 누르면/취소하면 likecheck값 변경 -->
+
+
+	<update parameterType="HashMap" id="likeCheck">UPDATE likey SET likecheck =
+		likecheck + 1 WHERE email=#{email} AND articlenum=#{articlenum}
+	</update>
+
+	<update parameterType="HashMap" id="likeCheckCancel">UPDATE likey SET likecheck =
+		0 WHERE email=#{email} AND articlenum=#{articlenum}
+	</update>
+
+	<!-- 게시물의 like값 +/- -->
+
+
+	<update parameterType="int" id="likeCntUp">update board set like1=like1 + 1
+		where articlenum = #{articlenum}
+	</update>
+
+	<update parameterType="int" id="likeCntDown">update board set like1=like1 - 1
+		where articlenum = #{articlenum}
+	</update>
+
+</mapper>

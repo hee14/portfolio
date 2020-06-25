@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+.foot_container { width: auto; font-size:0.8rem!important; padding-right: 15px; padding-left: 15px; margin: auto!important; padding-bottom: 1.25rem!important; padding-top: 1.25rem!important; margin-left:300px; margin-right:300px;}
+.foot_container > div { margin: 0 auto; position: relative; border-top: 1px solid #eaeeef!important; text-align: center;}
+.footer-cont{ margin-bottom: 1.25rem!important; display: flex!important; list-style:none; margin-block-start:2.3rem; padding-inline-start: 0px; justify-content: center;}
+.footcont {line-height:1.4rem; margin-bottom: 30px;}
+.footer-cont .contlogo img { height: 50px;}
+.social_item { display:flex!important; }
+.twitter {  font-size: 2rem; margin-right: 1.25rem!important; margin-left:0!important;}
+.facebook { font-size: 2rem;}
+.footcont { margin-left: 21px; color: #a9afb3; font-weight: 300;}
+.companycard { list-style:none; padding-inline-start: 0px; margin-left: 21px;  color: #a9afb3;}
+.comcont {font-size: 0.80rem!important;}

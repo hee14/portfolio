@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Note">
+	<cache />
+	
+	<select id = "getNoteReceiverName" parameterType = "int" resultType = "string">
+		select name from member where memid = #{memid}
+	</select>
+	
+	<!-- 쪽지 보내기 데이터 저장 -->
+	<insert id = "insertNote" parameterType = "Note">
+		insert into note(noteid, notereceiver, notesender, content, send_date, status, rethatid, rethat) 
+		values(note_seq.nextval, #{notereceiver}, #{notesender}, #{content}, sysdate, #{status}, 0, 0)
+	</insert>
+	
+	<!-- 답장을 보낸 경우의 글 -->
+	<update id = "updateNote" parameterType = "int">
+		update note set rethat = 1 where noteid = #{noteid}
+	</update>
+	
+	
+	<!-- 쪽지 답장 데이저 저장 -->
+	<insert id = "insertNote2" parameterType = "Note">
+		insert into note(noteid, notereceiver, notesender, content, send_date, status, rethatid, rethat) 
+		values(note_seq.nextval, #{notereceiver}, #{notesender}, #{content}, sysdate, #{status}, #{noteid}, 0)
+	</insert>
+	
+	<select id = "getMyNoteSendList" parameterType = "string" resultType = "Note">
+		select * from note where notesender = #{name} order by send_date desc
+	</select>
+	
+	<select id = "getMyNoteReceiveList" parameterType = "string" resultType = "Note">
+		select * from note where notereceiver = #{name} order by send_date desc
+	</select>
+	
+	<update id = "updateMyNoteStatus" parameterType = "string">
+		update note set status = 1, read_date = sysdate where noteid = #{noteid}
+	</update>
+	
+	
+</mapper>

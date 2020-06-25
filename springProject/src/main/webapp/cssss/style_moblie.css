@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+
+html { font-size: 16px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+.contain > div > h1 > a > img { width: 7.5rem; }
+.contain .header ul li:nth-child(1) {display : none; }
+.contain .header .total span, .container .header ul li:nth-child(2) span { position: absolute;left:-40000%; }
+.contain .header ul li:nth-child(2) { right: 4.5rem; }
+.contain .header ul li:nth-child(2) i { display:inline-block; font-size:1.8rem;}
+.contain > div nav > ul > li > a { padding: 1rem 1rem;}
+.contain > div nav > ul > li ~ li a:after { background: none;  }
+.contain .header .total { display:inline-block; position: absolute; right:1.25rem;  padding: 0.9rem 1rem; font-size:1.9rem; color: black;}

@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+span { font-size: 17px; color: #878d91; font-weight: 400; display: inline-block; margin-bottom: .4rem; }
+input { overflow:visible; margin:0; font-family:inherit;}
+
+
+
+.signup_wrap { max-width: 504px; padding: 2.5rem 0.75rem 1.75rem 0.75rem; margin: auto; margin-bottom: 5rem!important;}
+.signup_wrap > h2 { margin-bottom: 2.45rem!important; text-align: center; font-weight: 400; font-size: 1.65rem; margin-block-start: 0px; color:#363a3c!important;}
+.signup_wrap .info-group { margin-bottom: 0.15rem; }
+.signup_wrap .info-group .myintro { margin-left:20px; margin-bottom: 25px;}
+.signup_wrap .row { display: flex; flex-wrap: wrap; margin-right: -15px;  margin-left:-15px; }
+.info-group > span > img {  width: 100px; height:100px; border-radius: 100%;}
+.cols { margin-bottom:1rem!important; }
+.cols > span {float:left; margin-left:20px;}
+.memberLikeName { font-size:1rem; margin-top:14px;}
+.memberLike { font-size:1rem; margin-top:14px;  }
+.btn { display: block; text-align: center; vertical-align: middle; user-select: none; border: 1px solid #c2c2c2; padding: 0.6rem 0.75rem; font-size: 1rem; line-height:1.5; border-radius: 3px; transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; width: 100%; font-weight: 400; margin-top: 1.75rem!important; margin-bottom: 1.25rem!important; }
+.btn:disabled { opacity: .65; }
+
+
+

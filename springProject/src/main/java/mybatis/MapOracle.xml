@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="mybatis.Smap">
+		<cache />
+
+	<!-- 1. 지도 추가 -->
+	<select id = "getMemjoinClass" parameterType = "string" resultType = "Smap">
+		select distinct cb.meet_date_start, bm.name, cj.classnum, cj.meet_title, bm.book_id, cb.meet_subtitle ,cb.meet_location, inter.interestPng
+		from bookmember bm, classbook cb, classjoin cj, interest inter
+		where bm.class_id = cj.classnum and bm.book_id = cb.book_id and cj.like_ca = inter.interestnum and bm.name = #{name} order by cb.meet_date_start
+	</select>
+	
+	
+
+
+</mapper>

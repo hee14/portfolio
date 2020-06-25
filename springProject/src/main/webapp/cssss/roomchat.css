@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+body { font-size: 1rem; margin:0px; font-family: 'Noto Sans KR', sans-serif;}
+a { text-decoration: none; color: #a9afb3;}
+label { display: inline-block; margin-bottom: .5rem; }
+input { overflow:visible; }
+.roomchat_wrap { max-width: 504px; padding: 0.1rem 0.75rem 1.75rem 0.75rem; margin: auto; margin-bottom: 5rem!important;}
+html { font-size: 20px;}
+.col-11{margin: 0 auto; border: 1px solid #9bbbd4; background-color:#9bbbd4; height: 600px; border-radius: 10px; overflow: scroll; -ms-overflow-style: none;}
+.col-12-1 { width: 407px; float: left; }

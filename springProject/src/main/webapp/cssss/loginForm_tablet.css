@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+*,:after,:before{box-sizing:border-box;}
+html { font-size: 20px;}
+body { font-size: 1rem; margin:0px;font-family: 'Noto Sans KR', sans-serif;}
+.login_wrap .loginConnec .loginConnec_info .autologin { flex: 0 0 50%; max-width:50%; }
+.login_wrap .loginConnec .loginConnec_info .findinfo { flex: 0 0 50%; max-width:50%;  }
