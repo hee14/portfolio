@@ -505,7 +505,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  text-align: center;
+  
 }
 
 #hero-no-slider::before {
@@ -593,7 +593,6 @@ section {
 
 
 .section-bg {
-  background-color: #f3f8fa;
 }
 
 .section-title {
